@@ -24,6 +24,27 @@ public class ElviraSteps {
         homePage.goToElvire();
     }
 
+    @Given("I open Elvira")
+    public void openToElvira() {
+        homePage.goToElvire();
+        homePage.closeAdvertisement();
+    }
+
+    @Then("the advertisement (is|is not) shown")
+    public void verifyAdvertisementShown(String expect){
+        if ("is".equals(expect)){
+            Assert.assertTrue("Advertisement is not shown, it should be!", homePage.isAdvertisementDisplayed());
+        }
+        else{
+            Assert.assertFalse("Advertisement is shown, it should not be!", homePage.isAdvertisementDisplayed());
+        }
+    }
+
+    @When("I close the advertisement")
+    public void closeAdvertisement(){
+        homePage.closeAdvertisement();
+    }
+
     @When("I search for a (.*) ticket from (.*) to (.*) on (\\d+) of (\\d+)")
     public void searchTrain(String type, String from, String to, int day, int month) {
         searchDialog.setFrom(from);
