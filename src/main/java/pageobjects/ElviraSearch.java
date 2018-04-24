@@ -5,6 +5,8 @@ import static driver.DriverMethods.*;
 
 import org.openqa.selenium.By;
 
+import java.util.Set;
+
 public class ElviraSearch {
     private final By fromField = By.id("from_station");
     private final By toField = By.id("to_station");
@@ -37,7 +39,11 @@ public class ElviraSearch {
     }
 
     public void search() {
+        Set<String> oldTitles = getTabs();
         clickElement(searchButton);
+        Set<String> newTitles = getTabs();
+
+        switchToWindowHandle(getNewestWindowTitle(oldTitles, newTitles));
     }
 
     private int currentMonth() {

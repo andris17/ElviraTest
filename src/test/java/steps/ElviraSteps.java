@@ -31,17 +31,16 @@ public class ElviraSteps {
     }
 
     @Then("the advertisement (is|is not) shown")
-    public void verifyAdvertisementShown(String expect){
-        if ("is".equals(expect)){
+    public void verifyAdvertisementShown(String expect) {
+        if ("is".equals(expect)) {
             Assert.assertTrue("Advertisement is not shown, it should be!", homePage.isAdvertisementDisplayed());
-        }
-        else{
+        } else {
             Assert.assertFalse("Advertisement is shown, it should not be!", homePage.isAdvertisementDisplayed());
         }
     }
 
     @When("I close the advertisement")
-    public void closeAdvertisement(){
+    public void closeAdvertisement() {
         homePage.closeAdvertisement();
     }
 
@@ -55,7 +54,21 @@ public class ElviraSteps {
     }
 
     @Then("the search results are shown")
-    public void verifySearchResultsShown(){
+    public void verifySearchResultsShown() {
         Assert.assertTrue("Search results are not shown, they should be!", searchResults.areSearchResultsShown());
+    }
+
+    @When("I open the info panel of the (\\d+). result")
+    public void openDetails(int number) {
+        searchResults.clickInfo(number);
+    }
+
+    @Then("the info panel (is|is not) open for the (\\d+). result")
+    public void verifyDetailsOpen(String status, int number) {
+        if ("is".equals(status)) {
+            Assert.assertTrue("Info panel is not shown, it should be!", searchResults.isInfoDisplayed(number));
+        } else {
+            Assert.assertFalse("Info panel is shown, it should not be!", searchResults.isInfoDisplayed(number));
+        }
     }
 }
