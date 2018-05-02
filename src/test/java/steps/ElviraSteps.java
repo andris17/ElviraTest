@@ -4,29 +4,33 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import pageobjects.ElviraSearch;
-import pageobjects.HomePage;
-import pageobjects.SearchResults;
+import pageobjects.*;
+
+import java.util.Map;
 
 public class ElviraSteps {
     ElviraSearch searchDialog = null;
     HomePage homePage = null;
     SearchResults searchResults = null;
+    LoginForm loginForm = null;
+    OrderPage orderPage = null;
 
     public ElviraSteps() {
         searchDialog = new ElviraSearch();
         homePage = new HomePage();
         searchResults = new SearchResults();
+        loginForm = new LoginForm();
+        orderPage = new OrderPage();
     }
 
     @Given("I navigate to Elvira")
     public void goToElvira() {
-        homePage.goToElvire();
+        homePage.goToElvira();
     }
 
     @Given("I open Elvira")
     public void openToElvira() {
-        homePage.goToElvire();
+        homePage.goToElvira();
         homePage.closeAdvertisement();
     }
 
@@ -71,4 +75,35 @@ public class ElviraSteps {
             Assert.assertFalse("Info panel is shown, it should not be!", searchResults.isInfoDisplayed(number));
         }
     }
+
+    @When("I change the language to (\\s\\s)")
+    public void changeLanguage(String language){
+        homePage.switchLanguage(language);
+    }
+
+    @When("I book the (\\d+). ticket")
+    public void bookTicket(Integer rowNumber){
+        searchResults.bookTicket(rowNumber);
+    }
+
+    @When("I log in with email (.*) and password (.*)")
+    public void login(String email, String password){
+        loginForm.enterEmail(email);
+        loginForm.enterPassword(password);
+        loginForm.login();
+    }
+
+    @When("I order the ticket")
+    public void orderTicket(){
+        orderPage.orderTicket();
+    }
+
+    @Then("I see the details of the trip as:")
+    public void verifyTripDetails(Map<String, String> details){
+        orderPage.openTripDetails();
+        Assert.assertEquals("The origin station is not as expected!", orderPage.getFromStation(), details.get("from"));
+        Assert.assertEquals("The destination station is not as expected!", orderPage.getToStation(), details.get("to"));
+        Assert.assertEquals("The date is not as expected!", orderPage.getDate(), details.get("date"));
+    }
+
 }

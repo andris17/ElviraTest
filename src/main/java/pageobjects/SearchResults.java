@@ -17,4 +17,12 @@ public class SearchResults {
     public boolean isInfoDisplayed(int number) {
         return isDisplayed(By.xpath(String.format("//div[@id='info%s']", number)));
     }
+
+    public void bookTicket(Integer rowNumber) {
+        clickElement(getBookButtonLocator(rowNumber));
+    }
+
+    private By getBookButtonLocator(Integer rowNumber) {
+        return By.xpath(String.format("//td[descendant::img[@id='binfo%s']]/following-sibling::td[descendant::input[@name='seb']]", rowNumber.toString()));
+    }
 }
