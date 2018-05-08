@@ -29,3 +29,25 @@ Feature: Elvira Search
     Then the advertisement is shown
     When I close the advertisement
     Then the advertisement is not shown
+
+  @Stations
+  Scenario Outline: Search train stations
+    Given I open Elvira
+    When I go to the station finder page
+    And I search for a station with criteria <search_criteria>
+    Then all the station results contain the search criteria <search_criteria>
+    Examples:
+      | search_criteria |
+      | Szeged          |
+      | Budapest        |
+
+  @Stations @Negative
+  Scenario Outline: Search train stations abroad
+    Given I open Elvira
+    When I go to the station finder page
+    And I search for a station with criteria <search_criteria>
+    Then the station result list has 0 elements
+    Examples:
+      | search_criteria |
+      | Zurich          |
+      | New York        |

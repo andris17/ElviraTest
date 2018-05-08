@@ -126,7 +126,8 @@ public class ElviraSteps {
 
         stationResults
                 .stream()
-                .forEach(e -> Assert.assertTrue("Not all search result contains the search criteria!", e.contains(searchCriteria)));
+                .map(String::toLowerCase)
+                .forEach(e -> Assert.assertTrue("Not all search result contains the search criteria!", e.contains(searchCriteria.toLowerCase())));
     }
 
     @Then("the station result list has (\\d+) elements")

@@ -10,6 +10,7 @@ public class HomePage {
     private final By advertisement = By.id("cboxOverlay");
     private final By advertisementClose = By.id("cboxClose");
     private final By languageSwitch = By.id("block-block-14");
+    private final By stationFinderLink = By.xpath("//a[@href='/mav-start/belfoldi-utazas/allomaskereso']");
 
     public void goToElvira() {
         navigate("http://elvira.hu");
@@ -44,5 +45,9 @@ public class HomePage {
         }
 
         clickElement(new ByChained(languageSwitch, languageLocator));
+    }
+
+    public void clickStationFinder(){
+        clickElement(stationFinderLink);
     }
 }
