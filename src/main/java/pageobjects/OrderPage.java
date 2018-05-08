@@ -47,6 +47,10 @@ public class OrderPage {
         clickElement(logout);
     }
 
+    public boolean isLogoutAvailable(){
+        return isPresent(logout);
+    }
+
     public String getTicketTpye() {
         return getSelectedOption(ticketTypeDropdown);
     }

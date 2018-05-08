@@ -17,6 +17,8 @@ public class Hooks {
         if (scenario.isFailed()) {
         }
         OrderPage orderPage = new OrderPage();
-        orderPage.logout();
+        if (orderPage.isLogoutAvailable()) {
+            orderPage.logout();
+        }
     }
 }
