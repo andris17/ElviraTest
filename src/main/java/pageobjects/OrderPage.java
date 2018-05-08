@@ -17,6 +17,7 @@ public class OrderPage {
     private final ByChained toStation = new ByChained(tripDetails, By.xpath(".//tr[2]/td[2]"));
     private final ByChained date = new ByChained(tripDetails, By.xpath(".//tr[3]/td[2]"));
     private final By logout = By.xpath("//form[@id='kijelentkezes']/input[@type='submit']");
+    private final By ticketTypeDropdown = By.id("fomname2");
 
     public void orderTicket() {
         clickElement(orderButton);
@@ -30,19 +31,23 @@ public class OrderPage {
         clickElement(ticketDetailsButton);
     }
 
-    public String getFromStation(){
+    public String getFromStation() {
         return getText(fromStation);
     }
 
-    public String getToStation(){
+    public String getToStation() {
         return getText(toStation);
     }
 
-    public String getDate(){
+    public String getDate() {
         return getText(date);
     }
 
-    public void logout(){
+    public void logout() {
         clickElement(logout);
+    }
+
+    public String getTicketTpye() {
+        return getSelectedOption(ticketTypeDropdown);
     }
 }

@@ -1,10 +1,14 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.pagefactory.ByChained;
+
 import static driver.DriverMethods.*;
 
 public class SearchResults {
     private final By searchContainer = By.id("timetable");
+    private final By ticketType = new ByChained(searchContainer, By.xpath(".//th[@class='t']"));
+
 
     public boolean areSearchResultsShown() {
         return isDisplayed(searchContainer);
@@ -20,6 +24,10 @@ public class SearchResults {
 
     public void bookTicket(Integer rowNumber) {
         clickElement(getBookButtonLocator(rowNumber));
+    }
+
+    public String getTicketType() {
+        return getText(ticketType);
     }
 
     private By getBookButtonLocator(Integer rowNumber) {

@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import driver.DriverWaits;
 import org.junit.Assert;
 import pageobjects.*;
 
@@ -60,6 +61,7 @@ public class ElviraSteps {
     @Then("the search results are shown")
     public void verifySearchResultsShown() {
         Assert.assertTrue("Search results are not shown, they should be!", searchResults.areSearchResultsShown());
+        DriverWaits.waitForSeconds(3);
     }
 
     @When("I open the info panel of the (\\d+). result")
@@ -77,33 +79,43 @@ public class ElviraSteps {
     }
 
     @When("I change the language to (\\s\\s)")
-    public void changeLanguage(String language){
+    public void changeLanguage(String language) {
         homePage.switchLanguage(language);
     }
 
     @When("I book the (\\d+). ticket")
-    public void bookTicket(Integer rowNumber){
+    public void bookTicket(Integer rowNumber) {
         searchResults.bookTicket(rowNumber);
     }
 
     @When("I log in with email (.*) and password (.*)")
-    public void login(String email, String password){
+    public void login(String email, String password) {
         loginForm.enterEmail(email);
         loginForm.enterPassword(password);
         loginForm.login();
     }
 
     @When("I order the ticket")
-    public void orderTicket(){
+    public void orderTicket() {
         orderPage.orderTicket();
     }
 
     @Then("I see the details of the trip as:")
-    public void verifyTripDetails(Map<String, String> details){
+    public void verifyTripDetails(Map<String, String> details) {
         orderPage.openTripDetails();
         Assert.assertEquals("The origin station is not as expected!", orderPage.getFromStation(), details.get("from"));
         Assert.assertEquals("The destination station is not as expected!", orderPage.getToStation(), details.get("to"));
         Assert.assertEquals("The date is not as expected!", orderPage.getDate(), details.get("date"));
+    }
+
+    @Then("the ticket type is (.*) on the search results page")
+    public void verifyTicketTypeSearchResults(String expectedType) {
+        Assert.assertEquals("The ticket type is not as expected!", expectedType, searchResults.getTicketType());
+    }
+
+    @Then("the ticket type is (.*) on the order page")
+    public void verifyTicketTypeOrderPage(String expectedType) {
+        Assert.assertTrue("The ticket type is not as expected!", orderPage.getTicketTpye().contains(expectedType));
     }
 
 }

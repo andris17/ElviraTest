@@ -27,9 +27,11 @@ public class ElviraSearch {
 
     public void setDate(int month, int day) {
         clickElement(dateField);
-        if (month > currentMonth()) do {
-            clickElement(nextMonthButton);
-        } while (month == currentMonth());
+        if (month > currentMonth() + 1) {
+            do {
+                clickElement(nextMonthButton);
+            } while (month == currentMonth());
+        }
 
         clickElement(By.xpath(String.format("//div[@id='ui-datepicker-div']//td[@data-handler='selectDay']/a[text()='%s']", day)));
     }
