@@ -7,6 +7,7 @@ import driver.DriverWaits;
 import org.junit.Assert;
 import pageobjects.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class ElviraSteps {
@@ -15,6 +16,7 @@ public class ElviraSteps {
     SearchResults searchResults = null;
     LoginForm loginForm = null;
     OrderPage orderPage = null;
+    StationFinder stationFinder = null;
 
     public ElviraSteps() {
         searchDialog = new ElviraSearch();
@@ -22,6 +24,7 @@ public class ElviraSteps {
         searchResults = new SearchResults();
         loginForm = new LoginForm();
         orderPage = new OrderPage();
+        stationFinder = new StationFinder();
     }
 
     @Given("I navigate to Elvira")
@@ -61,7 +64,6 @@ public class ElviraSteps {
     @Then("the search results are shown")
     public void verifySearchResultsShown() {
         Assert.assertTrue("Search results are not shown, they should be!", searchResults.areSearchResultsShown());
-        DriverWaits.waitForSeconds(3);
     }
 
     @When("I open the info panel of the (\\d+). result")
@@ -116,6 +118,30 @@ public class ElviraSteps {
     @Then("the ticket type is (.*) on the order page")
     public void verifyTicketTypeOrderPage(String expectedType) {
         Assert.assertTrue("The ticket type is not as expected!", orderPage.getTicketTpye().contains(expectedType));
+    }
+
+    @Then("all the station results contain the search criteria (.*)")
+    public void verifyStationSearchResults(String searchCriteria) {
+        List<String> stationResults = stationFinder.getResults();
+
+        stationResults
+                .stream()
+                .forEach(e -> Assert.assertTrue("Not all search result contains the search criteria!", e.contains(searchCriteria)));
+    }
+
+    @Then("the station result list has (\\d+) elements")
+    public void verifyStationResultsListCount(int expectedAmount) {
+        Assert.assertEquals("The station results does not have the expected amount of elements!", expectedAmount, stationFinder.getNumberOfResults());
+    }
+
+    @When("I go to the station finder page")
+    public void goToStationFinder() {
+        homePage.clickStationFinder();
+    }
+
+    @When("I search for a station with criteria (.*)")
+    public void searchStation(String searchCriteria) {
+        stationFinder.search(searchCriteria);
     }
 
 }
