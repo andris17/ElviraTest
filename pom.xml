@@ -4,7 +4,7 @@
 
     <groupId>Ghost</groupId>
     <artifactId>ElviraTest</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>ElviraTest</name>
@@ -12,7 +12,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <failsafe.plugin.version>2.20.1</failsafe.plugin.version>
+        <failsafe.plugin.version>2.21.0</failsafe.plugin.version>
+        <surefire.plugin.version>2.21.0</surefire.plugin.version>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
         <cucumber.version>1.2.5</cucumber.version>
         <cucumber.reporting.version>3.14.0</cucumber.reporting.version>
@@ -36,7 +37,7 @@
     </build>
     <profiles>
         <profile>
-            <id>defaultTestRunner</id>
+            <id>ElviraTest</id>
             <build>
                 <plugins>
                     <plugin>
@@ -44,16 +45,13 @@
                         <version>${failsafe.plugin.version}</version>
                         <configuration>
                             <includes>
-                                <include>**/DefaultTestRunner.java</include>
+                                <include>**/DefaultElviraTest.java</include>
                             </includes>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${surefire.plugin.version}</version>
                     </plugin>
                 </plugins>
             </build>
@@ -73,7 +71,7 @@
         <dependency>
             <groupId>Ghost</groupId>
             <artifactId>SeleniumBase</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
