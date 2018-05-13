@@ -19,7 +19,7 @@ import utils.Log4jUtils;
         plugin = {"pretty", "html:target/cucumber/html-report", "json:target/cucumber.json"},
         features = "src/test/resources/features")
 
-public class DefaultTestRunner {
+public class DefaultElviraTest {
 
     @BeforeClass
     public static void beforeClass() {
@@ -46,6 +46,6 @@ public class DefaultTestRunner {
     public static void afterClass() {
         System.out.println("Test suite is finished, browser will be closed.");
 
-//        DriverManager.destroyDriver();
+        DriverManager.destroyDriver();
     }
 }
