@@ -13,11 +13,11 @@ public class LoginForm {
     private final By useExistingLogin = By.xpath("//input[@type='radio' and @value='belep']");
 
     public void enterEmail(String email) {
-        setText(emailField, email);
+        clearAndSetText(emailField, email);
     }
 
     public void enterPassword(String password) {
-        setText(passwordField, password);
+        clearAndSetText(passwordField, password);
     }
 
     public void login() {

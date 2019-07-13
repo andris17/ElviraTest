@@ -18,11 +18,11 @@ public class ElviraSearch {
     private final By currentMonthDay = By.xpath("//div[@id='ui-datepicker-div']//td[@data-handler='selectDay']");
 
     public void setFrom(String inputText) {
-        setText(fromField, inputText);
+        clearAndSetText(fromField, inputText);
     }
 
     public void setTo(String inputText) {
-        setText(toField, inputText);
+        clearAndSetText(toField, inputText);
     }
 
     public void setDate(int month, int day) {

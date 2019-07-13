@@ -20,7 +20,7 @@ public class StationFinder {
     }
 
     public void search(String searchCriteria){
-        setText(searchField, searchCriteria);
+        clearAndSetText(searchField, searchCriteria);
         clickElement(searchButton);
     }
 
