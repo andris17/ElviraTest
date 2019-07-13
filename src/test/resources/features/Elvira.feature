@@ -17,11 +17,11 @@ Feature: Elvira Search
     Then I see the details of the trip as:
       | from | Budapest-Nyugati |
       | to   | Szeged           |
-      | date | 2018.05.17       |
+      | date | 2019.07.17       |
     Examples:
-      | ticket_type              |
-      | Teljesárú menetdíj       |
-      | Természetjáró kedvezmény |
+      | ticket_type        |
+      | Teljesárú menetdíj |
+      | Hallássérült (90%) |
 
 
   @Advertisement
