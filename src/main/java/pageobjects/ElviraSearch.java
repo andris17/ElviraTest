@@ -49,7 +49,7 @@ public class ElviraSearch {
         clickElement(searchButton);
         Set<String> newTitles = getTabs();
 
-        switchToWindowHandle(getNewestWindowTitle(oldTitles, newTitles));
+        switchToTab(getNewestWindowTitle(oldTitles, newTitles));
     }
 
     private int currentMonth() {
